@@ -38,8 +38,8 @@ nat = 10 # number of atoms
 rho_at_rad = [np.random.rand(100) for _ in range(nat)] # 10 atoms
 r = np.arange(0, 10) * 0.1 # radial grid
 pos = np.random.rand(nat, 3) # random positions of atoms
-rho_g = fft_handler.fft_from_atom_centered(
-    rho_at_rad=rho_at_rad,
+rho_g = fft_handler.fft_from_atom_centered_radials(
+    at_rad=rho_at_rad,
     r=r,
     pos=pos
 )
@@ -60,12 +60,12 @@ pos = np.random.rand(nat, 3) # random positions of atoms
 denmat_r = [       np.random.rand(nat, nat) 
             + 1j * np.random.rand(nat, nat) 
             for _ in range(nR)] # density matrix
-rho_g = fft_handler.fft_from_dm(
-    ao_rad=ao_rad,
+rho_g = fft_handler.fft_from_atom_centered_radials(
+    data=ao_rad,
     r=r,
     pos=pos,
     iR=iR,
-    denmat_r=denmat_r
+    denmat=denmat_r
 )
 rho_r = fft_handler.ifft(rho_g)
 
